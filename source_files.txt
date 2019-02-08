@@ -1,0 +1,4 @@
+src/main/java/algs/InsertionSort.java
+src/main/java/algs/SelectionSort.java
+src/main/java/algs/Sorter.java
+src/main/resources/ScanText.java
