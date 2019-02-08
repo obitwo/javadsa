@@ -1,5 +1,5 @@
-import java.io.IOException;
-import java.lang.Comparable;
+package algs;
+
 import java.util.Arrays;
 
 /**

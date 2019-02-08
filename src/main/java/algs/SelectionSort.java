@@ -7,10 +7,6 @@ import java.util.Arrays;
  * ~N^2/2 compares and N exchanges
  */
 public class SelectionSort extends Sorter {
-  public SelectionSort() {
-    super();
-  }
-
   /**
    * main method.
    */
