@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 /**
  * Implementation of insertion sort.
- *
  * - ~N^2/4 compares and ~N2/4 exchanges (avg)
  * - ~N^2/2 compares and ~N2/2 exchanges (worst)
  * - ~N compares and 0 exchanges (best)

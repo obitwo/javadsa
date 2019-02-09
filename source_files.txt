@@ -3,4 +3,6 @@ src/main/java/algs/SelectionSort.java
 src/main/java/algs/ShellSort.java
 src/main/java/algs/Sorter.java
 src/main/java/benchmark/SortCompare.java
+src/main/java/datast/Counter.java
+src/main/java/datast/Flips.java
 src/main/resources/ScanText.java

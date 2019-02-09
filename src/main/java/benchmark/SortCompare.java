@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class SortCompare {
+  private static final String OUTPUT_FORMAT = "%s is %f times faster than %s";
+
   private static double time(String alg, double[] numbers) {
     long startTime = System.nanoTime();
 
@@ -43,8 +45,7 @@ public class SortCompare {
     int bestIndex = elapsedTimes[0] >= elapsedTimes[1] ? 1 : 0;
     int worstIndex = bestIndex == 1 ? 0 : 1;
     double algFactor = elapsedTimes[worstIndex] / elapsedTimes[bestIndex];
-    String outputFormat = "%s is %f times faster than %s";
-    String output = String.format(outputFormat, names[bestIndex], algFactor, names[worstIndex]);
+    String output = String.format(OUTPUT_FORMAT, names[bestIndex], algFactor, names[worstIndex]);
 
     System.out.println(output);
   }
