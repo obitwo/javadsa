@@ -22,7 +22,7 @@ public class SortCompare {
     } else {
       throw new RuntimeException("Undefined algorithm");
     }
-    return (double) (System.nanoTime() - startTime) / 1_000_000_000.0;
+    return (double) (System.nanoTime() - startTime);
   }
 
   private static double timeSortRandom(String alg, int numItems, int numExps) {
