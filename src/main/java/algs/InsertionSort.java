@@ -12,12 +12,10 @@ public class InsertionSort extends Sorter {
   /**
    * Sorting method.
    */
-  public static void sort(int[] numbers) {
+  public static void sort(double[] numbers) {
     for (int i = 1; i < numbers.length; i++) {
-      for (int j = 0; j < i; j++) {
-        if (less(numbers[j], numbers[i])) {
-          swap(numbers, j, i);
-        }
+      for (int j = i - 1; j >= 0 && less(numbers[j], numbers[i]); j--) {
+        swap(numbers, j, i);
       }
     }
   }

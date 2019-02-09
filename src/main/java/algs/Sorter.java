@@ -12,7 +12,7 @@ public class Sorter {
    * Sorts and prints.
    */
   public static void main(String[] args) throws IOException {
-    int[] numbers = Arrays.stream(args).mapToInt(Integer::parseInt).toArray();
+    double[] numbers = Arrays.stream(args).mapToDouble(Double::parseDouble).toArray();
     sort(numbers);
     if (isSorted(numbers)) {
       System.out.println(Arrays.toString(numbers));
@@ -21,14 +21,14 @@ public class Sorter {
     }
   }
 
-  public static void sort(int[] numbers) {
+  public static void sort(double[] numbers) {
     Arrays.sort(numbers); // uses quicksort
   }
 
   /**
    * Returns true if array sorted.
    */
-  public static boolean isSorted(int[] numbers) {
+  static boolean isSorted(double[] numbers) {
     for (int i = 0; i < numbers.length - 1; i++) {
       if (!less(numbers[i], numbers[i + 1])) {
         return false;
@@ -37,12 +37,12 @@ public class Sorter {
     return true;
   }
 
-  static Boolean less(int val1, int val2) {
+  static Boolean less(double val1, double val2) {
     return val1 - val2 <= 0;
   }
 
-  static void swap(int[] numbers, int key1, int key2) {
-    int cache;
+  static void swap(double[] numbers, int key1, int key2) {
+    double cache;
     cache = numbers[key1];
     numbers[key1] = numbers[key2];
     numbers[key2] = cache;
