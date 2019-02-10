@@ -5,4 +5,6 @@ src/main/java/algs/Sorter.java
 src/main/java/benchmark/SortCompare.java
 src/main/java/datast/Counter.java
 src/main/java/datast/Flips.java
+src/main/java/datast/LinkedList.java
+src/main/java/datast/UnionFind.java
 src/main/resources/ScanText.java

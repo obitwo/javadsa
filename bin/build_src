@@ -1,4 +1,4 @@
 #!/bin/bash
 
 find src -iname *.java > source_files.txt
-javac @source_files.txt -d target
+javac @source_files.txt -d target -Xlint:unchecked
