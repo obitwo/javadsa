@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class UnionFind {
+public class UnionGraphFind {
   private ArrayList<ArrayList<Connection>> sites;
   private boolean[] marked;
 
   /**
-   * UnionFind constructor.
+   * UnionGraphFind constructor.
    */
-  public UnionFind(int count) {
+  public UnionGraphFind(int count) {
     sites = new ArrayList<ArrayList<Connection>>();
     for (int i = 0; i < count; i++) {
       sites.add(new ArrayList<Connection>());
@@ -100,7 +100,7 @@ public class UnionFind {
   }
 
   /**
-   * Returns string representation of UnionFind instance.
+   * Returns string representation of UnionGraphFind instance.
    */
   public String toString() {
     String output = "";
@@ -116,7 +116,7 @@ public class UnionFind {
   }
 
   /**
-   * UnionFind test client.
+   * UnionGraphFind test client.
    */
   public static void main(String[] args) {
     int sitesSize = Integer.parseInt(args[0]);
@@ -128,23 +128,23 @@ public class UnionFind {
       throw new RuntimeException("start and/or end site is invalid");
     }
 
-    UnionFind uf = new UnionFind(sitesSize);
+    UnionGraphFind ugf = new UnionGraphFind(sitesSize);
     for (int i = 0; i < connectionsSize; i++) {
-      buildConnections(uf);
+      buildConnections(ugf);
     }
 
-    System.out.println(uf.toString());
+    System.out.println(ugf.toString());
 
-    System.out.println(uf.count() + " components");
-    String assertString = uf.connected(start, end) ? "" : "NOT ";
+    System.out.println(ugf.count() + " components");
+    String assertString = ugf.connected(start, end) ? "" : "NOT ";
     System.out.println(start + " is " + assertString + "connected to " + end);
   }
 
-  private static void buildConnections(UnionFind uf) {
+  private static void buildConnections(UnionGraphFind ugf) {
     Random rand = new Random();
-    int site1 = rand.nextInt(uf.size());
-    int site2 = rand.nextInt(uf.size());
-    uf.union(site1, site2);
+    int site1 = rand.nextInt(ugf.size());
+    int site2 = rand.nextInt(ugf.size());
+    ugf.union(site1, site2);
   }
 
   private class Connection {
