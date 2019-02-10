@@ -1,12 +1,15 @@
 package datast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class UnionGraphFind {
   private ArrayList<ArrayList<Connection>> sites;
   private boolean[] marked;
+  private int[] components;
+  private int componentCount;
 
   /**
    * UnionGraphFind constructor.
@@ -34,14 +37,17 @@ public class UnionGraphFind {
       sites.set(site2, new ArrayList<Connection>());
     }
     sites.get(site1).add(connection);
-    sites.get(site2).add(connection);
+    if (site1 != site2) { // dont add self loops twice
+      sites.get(site2).add(connection);
+    }
   }
 
   /**
    * Finds component id from site.
    */
   public int find(int site) {
-    return 0;
+    countComponents();
+    return components[site];
   }
 
   /**
@@ -49,54 +55,42 @@ public class UnionGraphFind {
    */
   public boolean connected(int siteStart, int siteEnd) {
     marked = new boolean[sites.size()];
-    markConnections(siteStart, siteEnd);
-    return marked[siteStart] && marked[siteEnd];
-  }
-
-  private void markConnections(int site1, int site2) {
-    marked[site1] = true;
-
-    ArrayList<Connection> connections = sites.get(site1);
-    for (Connection connection : connections) {
-      int otherSite = connection.other(site1);
-      if (otherSite == site2) {
-        marked[otherSite] = true;
-        return;
-      }
-      if (marked[otherSite]) {
-        continue;
-      }
-      markConnections(otherSite, site2);
-    }
+    countComponents();
+    return components[siteStart] == components[siteEnd];
   }
 
   /**
    * Number of components.
    */
   public int count() {
-    marked = new boolean[sites.size()];
-    int count = 1;
-    return countComponents(0, count);
+    countComponents();
+    return componentCount; // start at root
   }
 
-  private int countComponents(int site, int count) {
-    marked[site] = true;
+  private int countComponents() {
+    components = new int[sites.size()];
+    componentCount = 0;
+
+    for (int i = 0; i < components.length; i++) {
+      if (components[i] == 0) {
+        componentCount++;
+        countSiteComponents(i, componentCount);
+      }
+    }
+
+    return componentCount;
+  }
+
+  private void countSiteComponents(int site, int count) {
+    components[site] = count;
 
     for (int i = 0; i < sites.get(site).size(); i++) {
       Connection connection = sites.get(site).get(i);
       int otherSite = connection.other(site);
-      if (!marked[otherSite]) {
-        return countComponents(otherSite, count);
+      if (components[otherSite] == 0) {
+        countSiteComponents(otherSite, count);
       }
     }
-
-    for (int i = 0; i < marked.length; i++) {
-      if (!marked[i]) {
-        count++;
-        return countComponents(i, count);
-      }
-    }
-    return count;
   }
 
   /**
@@ -134,10 +128,11 @@ public class UnionGraphFind {
     }
 
     System.out.println(ugf.toString());
-
     System.out.println(ugf.count() + " components");
     String assertString = ugf.connected(start, end) ? "" : "NOT ";
     System.out.println(start + " is " + assertString + "connected to " + end);
+    System.out.print(start + " is component " + ugf.find(start));
+    System.out.print(" and " + end + " in " + ugf.find(end) + "\n");
   }
 
   private static void buildConnections(UnionGraphFind ugf) {
