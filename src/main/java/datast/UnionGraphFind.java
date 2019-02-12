@@ -29,13 +29,18 @@ public class UnionGraphFind {
    * Links two sites.
    */
   public void union(int site1, int site2) {
+    // Builds connections/edges
     Connection connection = new Connection(site1, site2);
+
+    // initialize connection list for site1 & site2
     if (sites.get(site1) == null) {
       sites.set(site1, new ArrayList<Connection>());
     }
     if (sites.get(site2) == null) {
       sites.set(site2, new ArrayList<Connection>());
     }
+
+    // add connections
     sites.get(site1).add(connection);
     if (site1 != site2) { // dont add self loops twice
       sites.get(site2).add(connection);
@@ -142,6 +147,9 @@ public class UnionGraphFind {
     ugf.union(site1, site2);
   }
 
+  /**
+   * Inner connection class (edges)
+   */
   private class Connection {
     int vertex1;
     int vertex2;
