@@ -3,7 +3,6 @@ package datast;
 /**
  * Implements a linked list ADT.
  * - recursive chain of nodes
- * - load factor of 75%
  * - inner Node class
  */
 public class LinkedList {
