@@ -1,3 +1,4 @@
+src/main/java/algs/BinarySearch.java
 src/main/java/algs/InsertionSort.java
 src/main/java/algs/SelectionSort.java
 src/main/java/algs/ShellSort.java
@@ -7,4 +8,5 @@ src/main/java/datast/Counter.java
 src/main/java/datast/Flips.java
 src/main/java/datast/LinkedList.java
 src/main/java/datast/UnionGraphFind.java
+src/main/java/problems/RansomNote.java
 src/main/resources/ScanText.java

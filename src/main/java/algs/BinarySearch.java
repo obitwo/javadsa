@@ -1,0 +1,80 @@
+package algs;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+/**
+ * Implementation of binary search.
+ */
+public class BinarySearch {
+  private char[] sortedList;
+
+  /**
+   * BinarySearch constructor.
+   */
+  public BinarySearch(char[] elements) {
+    Arrays.sort(elements);
+    sortedList = elements;
+  }
+
+  public int find(char element) {
+    return searchPartition(element, 0, sortedList.length - 1);
+  }
+
+  private int searchPartition(char element, int start, int end) {
+    // is element >, <, or == to list[mid]
+    // base case: list.[mid] == element -> return mid
+    // base case: list.[last_mid] != elmenet -> return -1
+    //
+    int mid = (start + end) / 2;
+    char midValue = sortedList[mid];
+    int comparator = element - midValue;
+
+    if (comparator == 0) {
+      return mid;
+    } else if ((start == mid) && (mid == end)) {
+      return -1;
+    } else if (comparator > 0) {
+      return searchPartition(element, mid + 1, end);
+    } else if (comparator < 0) {
+      return searchPartition(element, start, mid - 1);
+    } else {
+      return -1;
+    }
+  }
+
+  public char[] sortedList() {
+    return sortedList;
+  }
+
+  /**
+   * Test client.
+   */
+  public static void main(String[] args) {
+    char[] collection = { 'a', 'd', 'k', 'l', 'z', 'o', 'h','n' };
+    char[] expectedCollection = { 'a', 'd', 'h', 'k', 'l', 'n', 'o', 'z' };
+    char value = 'c';
+    int expected = -1;
+    testSort(collection, expectedCollection);
+    testFind(value, collection, expected);
+
+    collection = new char[]{ 'a', 'd', 'k', 'l', 'z', 'c', 'o', 'h', 'n' };
+    value = 'c';
+    expected = 1; // index 'c' should be at
+    testFind(value, collection, expected);
+  }
+
+  private static void testSort(char[] collection, char[] expected) {
+    BinarySearch binarySearch = new BinarySearch(collection);
+    assert Arrays.equals(expected, binarySearch.sortedList()) : "not sorted";
+    System.out.println("Test for sortedList() passed");
+  }
+
+  private static void testFind(char value, char[] collection, int expected) {
+    BinarySearch binarySearch = new BinarySearch(collection);
+    int result = binarySearch.find(value);
+    String errorMessage = expected == -1 ? "should not be found" : "should be found";
+    assert result == expected : errorMessage;
+    System.out.println("Test for find() passed");
+  }
+}

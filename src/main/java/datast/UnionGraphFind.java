@@ -148,7 +148,7 @@ public class UnionGraphFind {
   }
 
   /**
-   * Inner connection class (edges)
+   * Inner connection class (edges).
    */
   private class Connection {
     int vertex1;
