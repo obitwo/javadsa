@@ -19,46 +19,44 @@ public class RansomNote {
    * RansomNote constructor.
    */
   public RansomNote(String note, String page) {
+    note = stripWS(note);
+    page = stripWS(page);
+
     // note string cant be long than page string
     if (note.length() > page.length()) {
       return;
     }
 
-    char[] noteChars = stripToCharArray(note);
-    char[] pageChars = stripToCharArray(page);
+    //int remaining = findQuadratic(note, page);
+    int remaining = findLinearithmic(note, page);
 
-    // int remainingChars = findCharsQuadratic(noteChars, pageChars);
-    int remainingChars = findCharsLinearithmic(noteChars, pageChars);
-
-    if (remainingChars == 0) {
+    if (remaining == 0) {
       canBlackmail = true;
     }
   }
 
   // Linearithmic (MlogM + NLogM)
-  private int findCharsLinearithmic(char[] noteChars, char[] pageChars) {
-    int count = noteChars.length;
-    BinarySearch bs = new BinarySearch(pageChars);
+  private int findLinearithmic(String note, String page) {
+    int count = note.length();
+    if (count == 0) return count;
+    BinarySearch bs = new BinarySearch(page); // PlogP
 
     // for each N do a binary search; return false if
-    for (int i = 0; i < noteChars.length; i++) {
-      if (bs.find(noteChars[i]) == 1) {
-        break;
-      } else {
-        count--;
-      }
+    for (int i = 0; i < note.length(); i++) {
+      if (bs.find(note.charAt(i)) == -1) break;
+      else count--;
     }
     return count;
   }
 
   // Quadratic (NM) (O^2)
-  private int findCharsQuadratic(char[] noteChars, char[] pageChars) {
-    int n = noteChars.length;
-    int m = pageChars.length;
+  private int findQuadratic(String note, String page) {
+    int n = note.length();
+    int m = page.length();
 
-    for (int i = 0; (i < pageChars.length) && (n > 0) && (n <= m); i++) {
-      for (int j = 0; j < noteChars.length; j++) {
-        if (noteChars[j] == pageChars[i]) {
+    for (int i = 0; (i < page.length()) && (n > 0) && (n <= m); i++) {
+      for (int j = 0; j < note.length(); j++) {
+        if (note.charAt(j) == page.charAt(j)) {
           n--;
         }
       }
@@ -74,8 +72,8 @@ public class RansomNote {
   }
 
   // strip spaces and return a char array
-  private static char[] stripToCharArray(String input) {
-    return input.replaceAll(" ", "").toCharArray();
+  private static String stripWS(String input) {
+    return input.replaceAll(" ", "");
   }
 
   /**
@@ -85,12 +83,12 @@ public class RansomNote {
     // test note.length > page.length
     String note = "I am your fatherr";
     String page = "I am your father";
-    testCanBlackmail(false, note, page);
+    //testCanBlackmail(false, note, page);
 
     // test string with match
     note = "abcdefghijklmnopqrstuvwxyz";
     page = "the quick brown fox jumps over the lazy dog";
-    testCanBlackmail(true, note, page);
+    //testCanBlackmail(true, note, page);
 
     // test same string
     note = "abcdefghijklmnopqrstuvwxyz";
@@ -100,7 +98,7 @@ public class RansomNote {
     // test blank string
     note = "";
     page = "";
-    testCanBlackmail(true, note, page);
+    //testCanBlackmail(true, note, page);
   }
 
   private static void testCanBlackmail(boolean expectedBoolean, String note, String page) {
