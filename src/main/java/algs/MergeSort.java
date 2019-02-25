@@ -74,6 +74,6 @@ class MergeSort {
     MergeSort sorter = new MergeSort(numbers);
     sorter.sort();
     assert expectedResult.equals(sorter.result()) : "Mismatched arrays";
-    System.out.println(Arrays.toString(sorter.result()));
+      System.out.println(Arrays.toString(sorter.result()));
   }
 }
