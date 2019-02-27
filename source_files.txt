@@ -1,4 +1,5 @@
 src/main/java/algs/BinarySearch.java
+src/main/java/algs/BinarySearchST.java
 src/main/java/algs/InsertionSort.java
 src/main/java/algs/MaxPQ.java
 src/main/java/algs/MergeSort.java
