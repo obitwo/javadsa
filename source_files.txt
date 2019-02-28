@@ -14,3 +14,4 @@ src/main/java/datast/LinkedList.java
 src/main/java/datast/UnionGraphFind.java
 src/main/java/problems/Deduper.java
 src/main/java/problems/RansomNote.java
+src/main/java/problems/SetOfStacks.java

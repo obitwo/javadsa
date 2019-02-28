@@ -13,7 +13,13 @@ public class BinarySearch {
    * BinarySearch constructor.
    */
   public BinarySearch(String input) {
-    this.sortedList = input;
+    sortedList = sortList(input);
+  }
+
+  private static String sortList(String input) {
+    char[] tempArray = input.toCharArray();
+    Arrays.sort(tempArray);
+    return new String(tempArray);
   }
 
   public int find(char element) {
@@ -65,7 +71,9 @@ public class BinarySearch {
 
   private static void testSort(String collection, String expected) {
     BinarySearch binarySearch = new BinarySearch(collection);
-    assert expected == binarySearch.sortedList() : "not sorted";
+    System.out.println("expected collection: " + expected);
+    System.out.println("actual collection: " + collection);
+    assert expected.equals(binarySearch.sortedList()) : "not sorted";
     System.out.println("Test for sortedList() passed");
   }
 
